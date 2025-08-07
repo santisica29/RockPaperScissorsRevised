@@ -39,18 +39,20 @@ function playGame() {
     round = playRound(humanChoice, computerChoice);
 
     if (round === 0){
-        console.log(`It's a tie, ${humanChoice} == ${computerChoice}`)
+        console.log(`It's a tie, ${humanChoice} == ${computerChoice}\nH:${humanScore} - C:${computerScore}`)
     } else if (round === 1){
+        humanScore++;
         console.log(`Human Wins: ${humanChoice} > ${computerChoice}
     H:${humanScore} - C:${computerScore}`)
     } else {
+        computerScore++;
         console.log(`Computer Wins: ${computerChoice} > ${humanChoice}
     H:${humanScore} - C:${computerScore}`)
     }
   }
 
-  let winner = humanScore === 5 ? 'Human' : 'Computer';
+  let winner = humanScore > computerScore ? 'Human' : 'Computer';
 
-  console.log(`The winner is ${winner} ${winner === 'Human' ? humanScore : computerScore}`)
+  console.log(`The winner is ${winner} - ${winner === 'Human' ? humanScore : computerScore}`)
 
 }
