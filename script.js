@@ -1,54 +1,49 @@
 //playGame();
 let playerScore = 0;
 let computerScore = 0;
-let buttons = document.querySelectorAll('.btn');
-let divForResult = document.querySelector('.result');
-let runningScore = document.querySelector('.score');
+let buttons = document.querySelectorAll(".btn");
+let divForResult = document.querySelector(".result");
+let runningScore = document.querySelector(".score");
 
-buttons.forEach(x => x.addEventListener('click', (e) => {
+buttons.forEach((x) =>
+  x.addEventListener("click", (e) => {
+    let weHaveAWinner = playerScore === 5 || computerScore === 5;
 
-  let weHaveAWinner = playerScore === 5 || computerScore === 5;
-
-  if (weHaveAWinner){
-    let winnerName = playerScore === 5 ? 'Player' : 'Computer'
-    divForResult.textContent = `Game Over\nThe winner is ${winnerName}`;
-    runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`
-
-    return;
-  }
-
-  let playerSelection = e.currentTarget.dataset.value;
-  let computerSelection = getComputerSelection();
-  let round = playRound(playerSelection, computerSelection);
-
-  switch (round){
-    case 1:
-      playerScore++;
-      divForResult.textContent = `Player wins this round. ${playerSelection} > ${computerSelection}`;
+    if (weHaveAWinner) {
+      let winnerName = playerScore === 5 ? "player" : "computer";
+      divForResult.textContent = `Game Over!!! the winner is ${winnerName}`;
       runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
-      break;
-    case -1:
-      computerScore++;
-      divForResult.textContent = `Computer wins this round. ${computerSelection} > ${playerSelection}`;
-      runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
-      break;
-    case 0:
-      divForResult.textContent = `It's a tie this round. ${computerSelection} == ${playerSelection}`;
-      runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
-  }
-}))
+
+      return;
+    }
+
+    let playerSelection = e.currentTarget.dataset.value;
+    let computerSelection = getComputerSelection();
+    let round = playRound(playerSelection, computerSelection);
+
+    switch (round) {
+      case 1:
+        playerScore++;
+        divForResult.textContent = `Player wins this round. ${playerSelection} > ${computerSelection}`;
+        runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+        break;
+      case -1:
+        computerScore++;
+        divForResult.textContent = `Computer wins this round. ${computerSelection} > ${playerSelection}`;
+        runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+        break;
+      case 0:
+        divForResult.textContent = `It's a tie this round. ${computerSelection} == ${playerSelection}`;
+        runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    }
+  })
+);
 
 function getComputerSelection() {
   let options = ["rock", "paper", "scissors"];
   let randomNum = Math.floor(Math.random() * options.length);
 
   return options[randomNum];
-}
-
-function getHumanSelection() {
-  let choice = prompt("Choose rock, paper or scissors").toLowerCase();
-
-  return choice;
 }
 
 function playRound(humanChoice, computerChoice) {
