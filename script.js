@@ -4,15 +4,14 @@ let computerScore = 0;
 let buttons = document.querySelectorAll(".btn");
 let divForResult = document.querySelector(".result");
 let runningScore = document.querySelector(".score");
+let winnerDisplay = document.querySelector(".winner");
+let weHaveAWinner = playerScore === 5 || computerScore === 5;
 
 buttons.forEach((x) =>
   x.addEventListener("click", (e) => {
-    let weHaveAWinner = playerScore === 5 || computerScore === 5;
-
+    
     if (weHaveAWinner) {
-      let winnerName = playerScore === 5 ? "player" : "computer";
-      divForResult.textContent = `Game Over!!! the winner is ${winnerName}`;
-      runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+      
 
       return;
     }
@@ -35,6 +34,12 @@ buttons.forEach((x) =>
       case 0:
         divForResult.textContent = `It's a tie this round. ${computerSelection} == ${playerSelection}`;
         runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    }
+
+    weHaveAWinner = playerScore === 5 || computerScore === 5;
+    if (weHaveAWinner) {
+      let winnerName = playerScore === 5 ? "player" : "computer";
+      winnerDisplay.textContent = `Game Over!!! the winner is ${winnerName}`;
     }
   })
 );
