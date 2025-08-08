@@ -5,16 +5,12 @@ let buttons = document.querySelectorAll(".btn");
 let divForResult = document.querySelector(".result");
 let runningScore = document.querySelector(".score");
 let winnerDisplay = document.querySelector(".winner");
-let weHaveAWinner = playerScore === 5 || computerScore === 5;
+let weHaveAWinner;
 
 buttons.forEach((x) =>
   x.addEventListener("click", (e) => {
     
-    if (weHaveAWinner) {
-      
-
-      return;
-    }
+    if (weHaveAWinner) return;
 
     let playerSelection = e.currentTarget.dataset.value;
     let computerSelection = getComputerSelection();
@@ -36,6 +32,8 @@ buttons.forEach((x) =>
         runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
     }
 
+    // TODO - make fn that checks if there is a winner
+    // make fn to display winner of round
     weHaveAWinner = playerScore === 5 || computerScore === 5;
     if (weHaveAWinner) {
       let winnerName = playerScore === 5 ? "player" : "computer";
