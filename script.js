@@ -1,11 +1,41 @@
 //playGame();
-
+let playerScore = 0;
+let computerScore = 0;
 let buttons = document.querySelectorAll('.btn');
+let divForResult = document.querySelector('.result');
+let runningScore = document.querySelector('.score');
 
 buttons.forEach(x => x.addEventListener('click', (e) => {
+
+  let weHaveAWinner = playerScore === 5 || computerScore === 5;
+
+  if (weHaveAWinner){
+    let winnerName = playerScore === 5 ? 'Player' : 'Computer'
+    divForResult.textContent = `Game Over\nThe winner is ${winnerName}`;
+    runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`
+
+    return;
+  }
+
   let playerSelection = e.currentTarget.dataset.value;
   let computerSelection = getComputerSelection();
-  playRound(playerChoice, computerSelection);
+  let round = playRound(playerSelection, computerSelection);
+
+  switch (round){
+    case 1:
+      playerScore++;
+      divForResult.textContent = `Player wins this round. ${playerSelection} > ${computerSelection}`;
+      runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+      break;
+    case -1:
+      computerScore++;
+      divForResult.textContent = `Computer wins this round. ${computerSelection} > ${playerSelection}`;
+      runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+      break;
+    case 0:
+      divForResult.textContent = `It's a tie this round. ${computerSelection} == ${playerSelection}`;
+      runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+  }
 }))
 
 function getComputerSelection() {
@@ -34,33 +64,4 @@ function playRound(humanChoice, computerChoice) {
   else result = -1;
 
   return result;
-}
-
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-  let round;
-
-  for (let i=0; i < 5; i++){
-    let humanChoice = getHumanSelection();
-    let computerChoice = getComputerSelection();
-    round = playRound(humanChoice, computerChoice);
-
-    if (round === 0){
-        console.log(`It's a tie, ${humanChoice} == ${computerChoice}\nH:${humanScore} - C:${computerScore}`)
-    } else if (round === 1){
-        humanScore++;
-        console.log(`Human Wins: ${humanChoice} > ${computerChoice}
-    H:${humanScore} - C:${computerScore}`)
-    } else {
-        computerScore++;
-        console.log(`Computer Wins: ${computerChoice} > ${humanChoice}
-    H:${humanScore} - C:${computerScore}`)
-    }
-  }
-
-  let winner = humanScore > computerScore ? 'Human' : 'Computer';
-
-  console.log(`The winner is ${winner} - ${winner === 'Human' ? humanScore : computerScore}`)
-
 }
