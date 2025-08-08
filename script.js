@@ -39,6 +39,7 @@ buttons.forEach((x) =>
   })
 );
 
+
 function getComputerSelection() {
   let options = ["rock", "paper", "scissors"];
   let randomNum = Math.floor(Math.random() * options.length);
