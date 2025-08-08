@@ -1,13 +1,21 @@
-playGame();
+//playGame();
 
-function getComputerChoice() {
+let buttons = document.querySelectorAll('.btn');
+
+buttons.forEach(x => x.addEventListener('click', (e) => {
+  let playerSelection = e.currentTarget.dataset.value;
+  let computerSelection = getComputerSelection();
+  playRound(playerChoice, computerSelection);
+}))
+
+function getComputerSelection() {
   let options = ["rock", "paper", "scissors"];
   let randomNum = Math.floor(Math.random() * options.length);
 
   return options[randomNum];
 }
 
-function getHumanChoice() {
+function getHumanSelection() {
   let choice = prompt("Choose rock, paper or scissors").toLowerCase();
 
   return choice;
@@ -34,8 +42,8 @@ function playGame() {
   let round;
 
   for (let i=0; i < 5; i++){
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
+    let humanChoice = getHumanSelection();
+    let computerChoice = getComputerSelection();
     round = playRound(humanChoice, computerChoice);
 
     if (round === 0){
