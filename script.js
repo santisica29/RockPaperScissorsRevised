@@ -5,7 +5,6 @@ let buttons = document.querySelectorAll(".btn");
 let divForResult = document.querySelector(".result");
 let runningScore = document.querySelector(".score");
 let winnerDisplay = document.querySelector(".winner");
-let weHaveAWinner;
 
 buttons.forEach((x) =>
   x.addEventListener("click", (e) => {
@@ -34,14 +33,17 @@ buttons.forEach((x) =>
 
     // TODO - make fn that checks if there is a winner
     // make fn to display winner of round
-    weHaveAWinner = playerScore === 5 || computerScore === 5;
-    if (weHaveAWinner) {
+    
+    if (isThereAWinner()) {
       let winnerName = playerScore === 5 ? "player" : "computer";
       winnerDisplay.textContent = `Game Over!!! the winner is ${winnerName}`;
     }
   })
 );
 
+function isThereAWinner(){
+  return playerScore === 5 || computerScore === 5;
+}
 
 function getComputerSelection() {
   let options = ["rock", "paper", "scissors"];
