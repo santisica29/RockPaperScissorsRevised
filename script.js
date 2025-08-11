@@ -1,10 +1,10 @@
-//playGame();
 let playerScore = 0;
 let computerScore = 0;
 let buttons = document.querySelectorAll(".btn");
 let divForResult = document.querySelector(".result");
 let runningScore = document.querySelector(".score");
 let winnerDisplay = document.querySelector(".winner");
+const WINNING_SCORE = 5;
 
 buttons.forEach((x) =>
   x.addEventListener("click", (e) => {
@@ -47,7 +47,7 @@ function displayWinner(winnerName, winnerSelection, loserSelection) {
 }
 
 function isThereAWinner() {
-  return playerScore === 5 || computerScore === 5;
+  return playerScore === WINNING_SCORE || computerScore === WINNING_SCORE;
 }
 
 function getComputerSelection() {
