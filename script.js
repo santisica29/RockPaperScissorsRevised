@@ -1,7 +1,7 @@
 let playerScore = 0;
 let computerScore = 0;
 let buttons = document.querySelectorAll(".btn");
-let resetBtn = document.querySelector('.reset');
+let resetBtn = document.querySelector(".reset");
 let divForResult = document.querySelector(".result");
 let runningScore = document.querySelector(".score");
 let winnerDisplay = document.querySelector(".winner");
@@ -32,15 +32,32 @@ buttons.forEach((x) =>
     if (isThereAWinner()) {
       let winnerName = playerScore === 5 ? "player" : "computer";
       winnerDisplay.textContent = `Game Over!!! the winner is ${winnerName}`;
+      disableButtons();
     }
   })
 );
 
-resetBtn.addEventListener('click', () => {
+resetBtn.addEventListener("click", resetGame);
+
+function disableButtons() {
+  buttons.forEach((btn) => (btn.disabled = true));
+}
+
+function enableButtons() {
+  buttons.forEach((btn) => (btn.disabled = false));
+}
+
+
+function resetGame() {
   playerScore = 0;
   computerScore = 0;
-})
 
+  winnerDisplay.textContent = "";
+  divForResult.textContent = `Let's start a new game`;
+  runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+
+  enableButtons();
+}
 function displayWinner(winnerName, winnerSelection, loserSelection) {
   if (winnerName === "tie") {
     divForResult.textContent = `It's a tie this round. ${winnerSelection} == ${loserSelection}`;
