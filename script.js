@@ -24,7 +24,7 @@ buttons.forEach((x) =>
         displayWinner("Computer", computerSelection, playerSelection);
         break;
       case 0:
-        displayWinner('tie', playerSelection, computerSelection);
+        displayWinner("tie", playerSelection, computerSelection);
         break;
     }
 
@@ -38,11 +38,10 @@ buttons.forEach((x) =>
 function displayWinner(winnerName, winnerSelection, loserSelection) {
   if (winnerName === "tie") {
     divForResult.textContent = `It's a tie this round. ${winnerSelection} == ${loserSelection}`;
-    runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
-    return;
+  } else {
+    divForResult.textContent = `${winnerName} wins this round. ${winnerSelection} > ${loserSelection}`;
   }
 
-  divForResult.textContent = `${winnerName} wins this round. ${winnerSelection} > ${loserSelection}`;
   runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
 }
 
