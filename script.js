@@ -47,16 +47,18 @@ function enableButtons() {
   buttons.forEach((btn) => (btn.disabled = false));
 }
 
-
 function resetGame() {
   playerScore = 0;
   computerScore = 0;
 
   winnerDisplay.textContent = "";
   divForResult.textContent = `Let's start a new game`;
-  runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
-
+  updateScore();
   enableButtons();
+}
+
+function updateScore(){
+  runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
 }
 function displayWinner(winnerName, winnerSelection, loserSelection) {
   if (winnerName === "tie") {
@@ -65,7 +67,7 @@ function displayWinner(winnerName, winnerSelection, loserSelection) {
     divForResult.textContent = `${winnerName} wins this round. ${winnerSelection} > ${loserSelection}`;
   }
 
-  runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+  updateScore();
 }
 
 function isThereAWinner() {
