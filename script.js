@@ -1,6 +1,7 @@
 let playerScore = 0;
 let computerScore = 0;
 let buttons = document.querySelectorAll(".btn");
+let resetBtn = document.querySelector('.reset');
 let divForResult = document.querySelector(".result");
 let runningScore = document.querySelector(".score");
 let winnerDisplay = document.querySelector(".winner");
@@ -34,6 +35,11 @@ buttons.forEach((x) =>
     }
   })
 );
+
+resetBtn.addEventListener('click', () => {
+  playerScore = 0;
+  computerScore = 0;
+})
 
 function displayWinner(winnerName, winnerSelection, loserSelection) {
   if (winnerName === "tie") {
