@@ -56,16 +56,18 @@ function getComputerSelection() {
   return options[randomNum];
 }
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanSelection, computerSelection) {
   let result = 0;
+  humanSelection = humanSelection.toLowerCase().trim();
+  computerSelection = computerSelection.toLowerCase().trim();
 
   let humanWins =
-    (humanChoice === "rock" && computerChoice === "scissors") ||
-    (humanChoice === "scissors" && computerChoice === "paper") ||
-    (humanChoice === "paper" && computerChoice === "rock");
+    (humanSelection === "rock" && computerSelection === "scissors") ||
+    (humanSelection === "scissors" && computerSelection === "paper") ||
+    (humanSelection === "paper" && computerSelection === "rock");
 
   if (humanWins) result = 1;
-  else if (humanChoice === computerChoice) result = 0;
+  else if (humanSelection === computerSelection) result = 0;
   else result = -1;
 
   return result;
