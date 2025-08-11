@@ -8,8 +8,7 @@ let winnerDisplay = document.querySelector(".winner");
 
 buttons.forEach((x) =>
   x.addEventListener("click", (e) => {
-    
-    if (weHaveAWinner) return;
+    if (isThereAWinner()) return;
 
     let playerSelection = e.currentTarget.dataset.value;
     let computerSelection = getComputerSelection();
@@ -18,22 +17,17 @@ buttons.forEach((x) =>
     switch (round) {
       case 1:
         playerScore++;
-        divForResult.textContent = `Player wins this round. ${playerSelection} > ${computerSelection}`;
-        runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+        displayWinner("Player", playerSelection, computerSelection);
         break;
       case -1:
         computerScore++;
-        divForResult.textContent = `Computer wins this round. ${computerSelection} > ${playerSelection}`;
-        runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+        displayWinner("Computer", computerSelection, playerSelection);
         break;
       case 0:
-        divForResult.textContent = `It's a tie this round. ${computerSelection} == ${playerSelection}`;
-        runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+        displayWinner('tie', playerSelection, computerSelection);
+        break;
     }
 
-    // TODO - make fn that checks if there is a winner
-    // make fn to display winner of round
-    
     if (isThereAWinner()) {
       let winnerName = playerScore === 5 ? "player" : "computer";
       winnerDisplay.textContent = `Game Over!!! the winner is ${winnerName}`;
@@ -41,7 +35,18 @@ buttons.forEach((x) =>
   })
 );
 
-function isThereAWinner(){
+function displayWinner(winnerName, winnerSelection, loserSelection) {
+  if (winnerName === "tie") {
+    divForResult.textContent = `It's a tie this round. ${winnerSelection} == ${loserSelection}`;
+    runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+    return;
+  }
+
+  divForResult.textContent = `${winnerName} wins this round. ${winnerSelection} > ${loserSelection}`;
+  runningScore.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+}
+
+function isThereAWinner() {
   return playerScore === 5 || computerScore === 5;
 }
 
